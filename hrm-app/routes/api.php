@@ -25,5 +25,9 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('/', [PersonnelController::class, 'index'])->middleware('permission:users.list'); 
+        Route::post('/', [PersonnelController::class, 'store'])->middleware('permission:users.create');
+        Route::get('/{user}', [PersonnelController::class, 'show'])->middleware('permission:users.view');
+        Route::put('/{user}', [PersonnelController::class, 'update'])->middleware('permission:users.update');
+        Route::delete('/{user}', [PersonnelController::class, 'destroy'])->middleware('permission:users.delete'); 
     });
 });
